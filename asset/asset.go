@@ -53,6 +53,18 @@ func (as *Asset) NotBlankStr(str string, msg string) {
 	}
 }
 
+func (as *Asset) ValidEnumUint8Str(val uint8, msg string, enums ...uint8) {
+    if as.Err != nil {
+        return
+    }
+    for _, e := range enums {
+        if val == e {
+            return
+        }
+    }
+    as.Err = errors.New(msg)
+}
+
 func (as *Asset) NotBlankSliceStr(strs []string, msg string) {
 	if as.Err == nil {
 		as.Err = NotBlankSliceStr(strs, msg)
